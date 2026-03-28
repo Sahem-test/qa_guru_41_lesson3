@@ -14,6 +14,7 @@ public class TextBoxTests {
     static void setup() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
+        Configuration.pageLoadStrategy = "eager";
     }
 
     @Test
@@ -26,7 +27,7 @@ public class TextBoxTests {
         $("#permanentAddress").setValue("Moscow, st.Bratskaya");
         $("#submit").click();
 
-        $("#output #name").shouldHave(text("Ivanov Ivan"));
+        $("[id=output] [id=name]").shouldHave(text("Ivanov Ivan"));
         $("#output #email").shouldHave(text("test@gmail.com"));
         $("#output #currentAddress").shouldHave(text("Moscow, st.Plehanova"));
         $("#output #permanentAddress").shouldHave(text("Moscow, st.Bratskaya"));
