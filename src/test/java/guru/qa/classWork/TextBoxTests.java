@@ -1,6 +1,7 @@
 package guru.qa.classWork;
 
 import com.codeborne.selenide.Configuration;
+import guru.qa.TestBase;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -8,17 +9,12 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class TextBoxTests {
+public class TextBoxTests extends TestBase {
 
-    @BeforeAll
-    static void setup() {
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
-        Configuration.pageLoadStrategy = "eager";
-    }
+
 
     @Test
-    void successfulFillFormTest() {
+    void successfulFillFormTest()  {
         open("/text-box");
 
         $("#userName").setValue("Ivanov Ivan");
