@@ -1,4 +1,4 @@
-package tests.examples;
+package guru.qa.examples;
 
 import org.junit.jupiter.api.*;
 
