@@ -14,7 +14,7 @@ public class TextBoxTests extends TestBase {
 
     @Test
     void successfulFillFormTest()  {
-        open("/text-box");
+        open("/one-page-form/text-box.html");
         $("#userName").setValue("Ivanov Ivan");
         $("#userEmail").setValue("test@gmail.com");
         $("#currentAddress").setValue("Moscow, st.Plehanova");
@@ -36,10 +36,12 @@ public class TextBoxTests extends TestBase {
     }
 
     @Test
-    void emailNoAtInvalidTest(){
+    void emailNoAtInvalidNegativeTest(){
         open("/text-box");
         $("#userEmail").setValue("testgmail.com");
         $("#submit").click();
         $("#userEmail").shouldHave(cssClass("field-error"));
     }
+
+
 }

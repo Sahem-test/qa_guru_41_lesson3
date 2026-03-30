@@ -1,17 +1,17 @@
 package guru.qa.homeWork;
 
-import guru.qa.TestBaseGuruQa;
+import guru.qa.TestBase;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class PracticeFormTests extends TestBaseGuruQa {
+public class PracticeFormTests extends TestBase {
 
     @Test
-    void FillPracticeFormPositiveTest(){
-
+    void FillPracticeFormPositiveTest() {
         open("/one-page-form/automation-practice-form.html");
         executeJavaScript("document.getElementById('fixedban')?.remove();");
         executeJavaScript("document.querySelector('footer')?.remove();");
@@ -44,9 +44,66 @@ public class PracticeFormTests extends TestBaseGuruQa {
         $("#resultModal").shouldHave(text("test.txt"));
         $("#resultModal").shouldHave(text("new address"));
         $("#resultModal").shouldHave(text("NCR Delhi"));
+    }
 
+    @Test
+    void minimalRequiredFieldsPositiveTest() {
+        open("/one-page-form/automation-practice-form.html");
+        $("#firstName").setValue("Ivan");
+        $("#lastName").setValue("Ivanov");
+        $("#gender-radio-1").click();
+        $("#userNumber").setValue("8985426455");
+        $("#submit").click();
 
+        $("#resultModal").shouldHave(text("Ivan Ivanov"));
+        $("#resultModal").shouldHave(text("Male"));
+        $("#resultModal").shouldHave(text("8985426455"));
+    }
 
+    @Test
+    void lessMinimalRequiredFieldsNegativeTest() {
+        open("/one-page-form/automation-practice-form.html");
+        $("#firstName").setValue("Ivan");
+        $("#submit").click();
+
+        $("#resultModal").shouldNotBe(visible);
+    }
+
+    @Test
+    void lessMinimalSignPhoneNegativeTest() {
+        open("/one-page-form/automation-practice-form.html");
+        $("#firstName").setValue("Ivan");
+        $("#lastName").setValue("Ivanov");
+        $("#gender-radio-1").click();
+        $("#userNumber").setValue("89854264");
+        $("#submit").click();
+
+        $("#resultModal").shouldNotBe(visible);
+    }
+
+    @Test
+    void emailWithoutTopLevelDomainNegativeTest() {
+        open("/one-page-form/automation-practice-form.html");
+        $("#firstName").setValue("Ivan");
+        $("#lastName").setValue("Ivanov");
+        $("#userEmail").setValue("testmail@");
+        $("#gender-radio-1").click();
+        $("#userNumber").setValue("8985426455");
+        $("#submit").click();
+
+        $("#resultModal").shouldNotBe(visible);
+    }
+
+    @Test
+    void emailNoAtInvalidNegativeTest() {
+        open("/one-page-form/automation-practice-form.html");
+        $("#firstName").setValue("Ivan");
+        $("#lastName").setValue("Ivanov");
+        $("#userEmail").setValue("testmail.com");
+        $("#gender-radio-1").click();
+        $("#userNumber").setValue("8985426455");
+        $("#submit").click();
+
+        $("#resultModal").shouldNotBe(visible);
     }
 }
-//uploadFromClasspath("resources/test.txt")
