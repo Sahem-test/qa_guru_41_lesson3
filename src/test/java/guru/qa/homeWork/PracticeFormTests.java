@@ -34,8 +34,19 @@ public class PracticeFormTests extends TestBaseGuruQa {
         $("#stateCity-wrapper").$(byText("Delhi")).click();
         $("#submit").click();
 
+        $("#resultModal").shouldHave(text("Ivan Ivanov"));
+        $("#resultModal").shouldHave(text("test@mail.com"));
+        $("#resultModal").shouldHave(text("Male"));
+        $("#resultModal").shouldHave(text("8985426455"));
+        $("#resultModal").shouldHave(text("1976-11-10"));
+        $("#resultModal").shouldHave(text("Maths"));
+        $("#resultModal").shouldHave(text("Sports"));
+        $("#resultModal").shouldHave(text("test.txt"));
+        $("#resultModal").shouldHave(text("new address"));
+        $("#resultModal").shouldHave(text("NCR Delhi"));
 
-        sleep(5000);
+
+
     }
 }
 //uploadFromClasspath("resources/test.txt")
